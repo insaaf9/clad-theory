@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__ . '/auth.php';
+requireAdminAuth();
+
 /**
  * Admin Shared Sidebar Component
  * Include this at the top of every admin page.
@@ -29,7 +32,7 @@ $adminTitle = isset($adminTitle) ? $adminTitle : 'Admin Panel';
     <div class="sidebar-brand">
         <div class="sidebar-brand__icon">CT</div>
         <div class="sidebar-brand__text">
-            <span class="sidebar-brand__name">Clad Theory</span>
+            <span class="sidebar-brand__name">CladTheory</span>
             <span class="sidebar-brand__sub">Admin Panel</span>
         </div>
     </div>
@@ -66,16 +69,29 @@ $adminTitle = isset($adminTitle) ? $adminTitle : 'Admin Panel';
     </nav>
 
     <!-- Footer -->
-    <div class="sidebar-footer">
-        <div class="sidebar-footer__info">
-            <div class="sidebar-footer__avatar">A</div>
-            <div>
-                <p class="sidebar-footer__name">Admin</p>
-                <p class="sidebar-footer__role">Super Administrator</p>
-            </div>
-        </div>
-    </div>
+  <div class="sidebar-footer">
+    <div class="sidebar-footer__content">
+        <button type="button" class="sidebar-profile-trigger" id="adminProfileTrigger" aria-expanded="false" aria-controls="adminProfileCard">
+            <span class="sidebar-footer__avatar">A</span>
+            <span class="sidebar-footer__meta">
+                <span class="sidebar-footer__name">Admin</span>
+                <span class="sidebar-footer__role">Super Administrator</span>
+            </span>
+        </button>
 
+        <div class="profile-float-card" id="adminProfileCard" role="dialog" aria-hidden="true">
+            <button type="button" class="profile-float-item" id="profileSettingsBtn">
+                <span>⚙</span>
+                <span>Settings</span>
+            </button>
+            <a href="logout.php" class="profile-float-item">
+                <span>↪</span>
+                <span>Logout</span>
+            </a>
+        </div>
+
+    </div>
+</div>
 </aside>
 <!-- ========== END SIDEBAR ========== -->
 
@@ -94,5 +110,67 @@ $adminTitle = isset($adminTitle) ? $adminTitle : 'Admin Panel';
         <div class="topbar-right">
             <a href="../index.php" class="topbar-btn" title="View website" target="_blank">🌐</a>
             <button class="topbar-btn" title="Settings" id="settingsBtn">⚙️</button>
+            <a href="logout.php" class="topbar-btn" title="Sign out">↪</a>
         </div>
     </header>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const trigger = document.getElementById('adminProfileTrigger');
+        const card = document.getElementById('adminProfileCard');
+        const settingsBtn = document.getElementById('profileSettingsBtn');
+
+        if (!trigger || !card) {
+            return;
+        }
+
+        const closeCard = function () {
+            card.classList.remove('is-visible');
+            trigger.setAttribute('aria-expanded', 'false');
+            card.setAttribute('aria-hidden', 'true');
+        };
+
+        const openCard = function () {
+            card.classList.add('is-visible');
+            trigger.setAttribute('aria-expanded', 'true');
+            card.setAttribute('aria-hidden', 'false');
+        };
+
+        trigger.addEventListener('click', function (event) {
+            event.stopPropagation();
+
+            if (card.classList.contains('is-visible')) {
+                closeCard();
+                return;
+            }
+
+            openCard();
+        });
+
+        card.addEventListener('click', function (event) {
+            event.stopPropagation();
+        });
+
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', function (event) {
+                event.stopPropagation();
+                closeCard();
+            });
+        }
+
+        document.addEventListener('click', function (event) {
+            const clickedInsideTrigger = trigger.contains(event.target);
+            const clickedInsideCard = card.contains(event.target);
+
+            if (!clickedInsideTrigger && !clickedInsideCard) {
+                closeCard();
+            }
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeCard();
+            }
+        });
+    });
+</script>

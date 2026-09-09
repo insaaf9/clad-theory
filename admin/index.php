@@ -1,5 +1,5 @@
 <?php
-// Admin Panel Entry Point - Redirect to dashboard
-header('Location: dashboard.php');
+// Admin Panel Entry Point - always open login first
+header('Location: login.php');
 exit;
 ?>

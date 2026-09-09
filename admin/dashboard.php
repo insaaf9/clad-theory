@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__ . '/auth.php';
+requireAdminAuth();
+
 $adminPage  = 'dashboard';
 $adminTitle = 'Dashboard';
 require __DIR__ . '/admin-header.php';

@@ -15,6 +15,9 @@
 header('Content-Type: application/json');
 header('X-Content-Type-Options: nosniff');
 
+require_once __DIR__ . '/../auth.php';
+requireAdminAuth(true);
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
     exit(json_encode(['success' => false, 'message' => 'Method not allowed.']));

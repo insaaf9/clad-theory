@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__ . '/auth.php';
+requireAdminAuth();
+
 $adminPage  = 'banner';
 $adminTitle = 'Banner Image';
 require __DIR__ . '/admin-header.php';
@@ -67,13 +70,13 @@ $activeCount = count(array_filter($bannerSlots, fn($s) => $s['active']));
     </div>
 
     <!-- Info Strip -->
-    <div class="info-strip fade-in fade-in-delay-1">
+    <!-- <div class="info-strip fade-in fade-in-delay-1">
         <span class="info-strip__icon">🗄️</span>
         <span class="info-strip__text">
             <strong>Live Mode:</strong> Connected to <code>clad_theory → banner_images</code>. Uploads are saved to the server and database in real time.
         </span>
         <a href="../index.php" target="_blank" class="btn btn--sm btn--ghost">Preview Site →</a>
-    </div>
+    </div> -->
 
     <!-- ── Quick Upload ─────────────────────────── -->
     <div class="card fade-in fade-in-delay-2" style="margin-bottom: 2rem;">
