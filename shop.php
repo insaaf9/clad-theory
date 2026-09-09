@@ -3,8 +3,11 @@ $pageTitle = 'Shop | Supro Minimalist E-Commerce';
 $bodyClass = 'shop-page';
 $currentPage = 'shop';
 
-// Product Catalog Data Array
-$products = [
+require_once __DIR__ . '/includes/db.php';
+require_once __DIR__ . '/includes/products.php';
+
+// Legacy catalog retained as a fallback in the shared product repository.
+$legacyProducts = [
     [
         'id' => 1,
         'name' => 'Aviator Sunglasses',
@@ -172,17 +175,12 @@ $products = [
     ]
 ];
 
-$categories = [
-    'Bags' => 12,
-    'Clothing' => 48,
-    'Hats & Gloves' => 9,
-    'Men' => 24,
-    'More Accessories' => 15,
-    'Shoes' => 18,
-    'T-shirt' => 31,
-    'Wallets & Cases' => 11,
-    'Women' => 52
-];
+$products = getProducts($pdo);
+
+$categories = [];
+foreach ($products as $product) {
+    $categories[$product['category']] = ($categories[$product['category']] ?? 0) + 1;
+}
 
 $featuredProducts = [
     [
@@ -330,7 +328,8 @@ require __DIR__ . '/includes/navbar.php';
             <main class="shop-catalog">
                 <div class="products-grid" id="productsGrid">
                     <?php foreach ($products as $p): ?>
-                    <article class="product-card" 
+                    <article class="product-card" tabindex="0" role="link"
+                             data-detail-url="product_detail.php?id=<?php echo (int) $p['id']; ?>"
                              data-id="<?php echo $p['id']; ?>"
                              data-category="<?php echo htmlspecialchars($p['category']); ?>"
                              data-price="<?php echo $p['price']; ?>"
@@ -366,7 +365,7 @@ require __DIR__ . '/includes/navbar.php';
 
                         <div class="product-card__content">
                             <h3 class="product-card__title">
-                                <a href="#" class="quick-view-trigger" data-id="<?php echo $p['id']; ?>"><?php echo htmlspecialchars($p['name']); ?></a>
+                                <a href="product_detail.php?id=<?php echo (int) $p['id']; ?>" data-id="<?php echo $p['id']; ?>"><?php echo htmlspecialchars($p['name']); ?></a>
                             </h3>
                             <!-- <div class="rating-stars"> -->
                                 <!-- <?php for ($i = 0; $i < 5; $i++): ?> -->

@@ -1,6 +1,6 @@
 <header class="topbar <?php echo isset($currentPage) && $currentPage === 'shop' ? 'topbar--shop' : ''; ?>">
     <div class="brand-wrap">
-        <a href="index.php" class="brand" aria-label="Clad Theory home">CLAD THEORY</a>
+        <a href="index.php" class="brand" aria-label="Clad Theory home">CladTheory.</a>
     </div>
 
     <nav class="main-nav" aria-label="Main navigation">

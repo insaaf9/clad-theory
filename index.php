@@ -78,11 +78,18 @@ $totalSlides = count($slides);
                 <?php echo $totalSlides > 0 ? htmlspecialchars($slides[$totalSlides - 1]['slide_title'] ?? '') : 'Welcome'; ?>
             </h1>
 
-            <a href="#" class="hero__link">
-                <span class="hero__link-text">View Case</span>
-                <span class="hero__link-line"></span>
-                <span class="hero__link-dot"></span>
-            </a>
+   <a href="#" class="hero__link">
+    <span class="hero__link-text">View Case</span>
+
+    <span class="hero__link-icon">
+        <span class="hero__link-line"></span>
+        <span class="hero__link-circle">
+            <svg class="hero__link-arrow" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 1L7 5L2 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </span>
+    </span>
+</a>
         </div>
     </div>
 

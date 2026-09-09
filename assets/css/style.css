@@ -769,6 +769,117 @@ button {
     font-size: 0.82rem;
 }
 
+.instagram-section {
+    padding: 5.5rem 2rem;
+    background: #17191d;
+    color: #f5f5f5;
+}
+
+.instagram-section__header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2.2rem;
+}
+
+.instagram-section__eyebrow {
+    margin: 0 0 0.7rem;
+    color: #ef4f82;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.instagram-section h2 {
+    margin: 0;
+    color: #f5f5f5;
+}
+
+.instagram-section__link,
+.instagram-empty__button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.instagram-section__link span,
+.instagram-empty__button span {
+    color: #ef4f82;
+    font-size: 1.25rem;
+    transition: transform var(--transition);
+}
+
+.instagram-section__link:hover span,
+.instagram-empty__button:hover span {
+    transform: translate(2px, -2px);
+}
+
+.instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
+.instagram-card {
+    min-width: 0;
+    min-height: 300px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.instagram-media {
+    min-width: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.instagram-empty {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: 190px;
+    padding: 2rem clamp(1.5rem, 4vw, 4rem);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: linear-gradient(110deg, rgba(213, 21, 95, 0.28), rgba(255, 255, 255, 0.04));
+}
+
+.instagram-empty__mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 1.1rem;
+    color: #fff;
+    font-size: 2.5rem;
+    line-height: 1;
+    flex: 0 0 auto;
+}
+
+.instagram-empty h3 {
+    margin: 0 0 0.45rem;
+    color: #fff;
+    font-size: clamp(1.35rem, 2vw, 2rem);
+}
+
+.instagram-empty p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.68);
+    line-height: 1.6;
+}
+
+.instagram-empty__button {
+    margin-left: auto;
+    padding: 0.8rem 0;
+}
+
 .about-section--clients {
     padding-top: 3rem;
     padding-bottom: 4rem;
@@ -806,6 +917,10 @@ button {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .instagram-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .experience-item {
         grid-template-columns: 1fr;
     }
@@ -824,8 +939,24 @@ button {
     }
 
     .services-grid,
-    .team-grid {
+    .team-grid,
+    .instagram-grid {
         grid-template-columns: 1fr;
+    }
+
+    .instagram-section {
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
+    }
+
+    .instagram-section__header,
+    .instagram-empty {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .instagram-empty__button {
+        margin-left: 0;
     }
 
     .client-row {
@@ -2365,3 +2496,842 @@ button {
         width: 140px;
     }
 }
+
+/* Product Detail Page */
+.product-detail-page {
+    background: #fff;
+    color: #17181c;
+    min-height: 100vh;
+}
+
+.product-detail-page .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.98);
+    border-bottom: 1px solid #eaeaea;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    padding: 1.1rem 3rem;
+}
+
+.product-detail-page .brand {
+    color: #111;
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.product-detail-page .main-nav a {
+    color: #333;
+    font-weight: 500;
+}
+
+.product-detail-page .main-nav a:hover,
+.product-detail-page .main-nav a.is-active {
+    color: #f15623;
+}
+
+.product-detail-page .main-nav a::after {
+    background: #f15623;
+}
+
+.product-detail-page .site-footer {
+    position: relative;
+    bottom: auto;
+    margin-top: 0;
+}
+
+.product-detail-page .site-footer .socials a,
+.product-detail-page .site-footer .copyright {
+    color: #666;
+}
+
+.product-detail-page .site-footer .socials a {
+    border-color: #ddd;
+}
+
+.product-detail {
+    width: min(1180px, 100%);
+    min-height: calc(100vh - 190px);
+    margin: 0 auto;
+    padding: 3.5rem 2rem 7rem;
+}
+
+.product-detail__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .65rem;
+    margin-bottom: 3rem;
+    color: #888;
+    font-size: .82rem;
+}
+
+.product-detail__breadcrumb a {
+    color: #333;
+}
+
+.product-detail__breadcrumb a:hover,
+.product-detail__category,
+.product-detail__meta a {
+    color: #f15623;
+}
+
+.product-detail__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, .85fr);
+    gap: 5rem;
+    align-items: center;
+}
+
+.product-detail__gallery {
+    min-width: 0;
+}
+
+.product-detail__image-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 3 / 4;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #f6f6f6;
+}
+
+.product-detail__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-detail__badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1;
+    padding: .35rem .7rem;
+    background: #f15623;
+    color: #fff;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.product-detail__badge--out {
+    background: #111;
+}
+
+.product-detail__thumbs {
+    display: flex;
+    gap: .75rem;
+    margin-top: 1rem;
+}
+
+.product-detail__thumb {
+    width: 72px;
+    height: 88px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e2e2e2;
+    background: #f6f6f6;
+    cursor: pointer;
+}
+
+.product-detail__thumb.is-active {
+    border-color: #f15623;
+}
+
+.product-detail__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-detail__content {
+    min-width: 0;
+}
+
+.product-detail__top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.product-detail__category {
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.product-detail__stock-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    color: #777;
+    font-size: .75rem;
+}
+
+.product-detail__stock-pill .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #aaa;
+}
+
+.product-detail__stock-pill.is-in .dot {
+    background: #47a447;
+}
+
+.product-detail__content h1 {
+    margin: .8rem 0 1rem;
+    color: #17181c;
+    font-size: clamp(2rem, 4vw, 3.3rem);
+    line-height: 1.1;
+}
+
+.product-detail__rating {
+    color: #d5d5d5;
+    letter-spacing: .12em;
+}
+
+.product-detail__rating .is-filled {
+    color: #f15623;
+}
+
+.product-detail__reviews {
+    margin-left: .5rem;
+    color: #777;
+    font-size: .8rem;
+    letter-spacing: 0;
+}
+
+.product-detail__price {
+    margin: 1.5rem 0;
+    color: #111;
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.product-detail__description {
+    max-width: 38rem;
+    margin: 0;
+    color: #666;
+    line-height: 1.8;
+}
+
+.product-detail__purchase {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .8rem;
+    margin-top: 2rem;
+}
+
+.detail-quantity {
+    display: flex;
+    height: 48px;
+    border: 1px solid #ddd;
+}
+
+.detail-quantity button,
+.detail-quantity input {
+    width: 42px;
+    border: 0;
+    background: #fff;
+    color: #222;
+    text-align: center;
+}
+
+.detail-quantity button {
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.detail-quantity input {
+    border-right: 1px solid #eee;
+    border-left: 1px solid #eee;
+}
+
+.detail-button {
+    height: 48px;
+    padding: 0 1.25rem;
+    border: 1px solid #111;
+    background: #111;
+    color: #fff;
+    cursor: pointer;
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+}
+
+.detail-button--buy {
+    border-color: #f15623;
+    background: #f15623;
+}
+
+.detail-button--buy-full {
+    width: 100%;
+    margin-top: .8rem;
+}
+
+.detail-button--wishlist {
+    width: 48px;
+    padding: 0;
+    background: #fff;
+    color: #111;
+    font-size: 1.4rem;
+}
+
+.detail-button--wishlist.is-filled {
+    color: #f15623;
+}
+
+.detail-button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.product-detail__perks {
+    display: grid;
+    gap: .8rem;
+    margin-top: 2rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.product-detail__perks .perk {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    color: #666;
+    font-size: .82rem;
+}
+
+.product-detail__perks svg {
+    flex: 0 0 auto;
+    color: #f15623;
+}
+
+.product-detail__meta {
+    display: grid;
+    gap: .6rem;
+    margin-top: 1.5rem;
+    color: #666;
+    font-size: .8rem;
+}
+
+.product-detail__meta span {
+    display: inline-block;
+    width: 80px;
+    color: #222;
+    font-weight: 700;
+}
+
+.product-detail__tabs {
+    margin-top: 6rem;
+    border-top: 1px solid #e5e5e5;
+}
+
+.pd-tabs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.pd-tab-btn {
+    padding: 1.2rem 0;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: #777;
+    cursor: pointer;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.pd-tab-btn.is-active {
+    border-bottom-color: #f15623;
+    color: #111;
+}
+
+.pd-tab-pane {
+    display: none;
+    padding: 2.5rem 0;
+    color: #666;
+    line-height: 1.8;
+}
+
+.pd-tab-pane.is-active {
+    display: block;
+}
+
+.pd-tab-pane h3 {
+    margin-top: 0;
+    color: #222;
+}
+
+.pd-info-table {
+    width: 100%;
+    max-width: 700px;
+    border-collapse: collapse;
+}
+
+.pd-info-table th,
+.pd-info-table td {
+    padding: .9rem 1rem;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.pd-info-table th {
+    width: 35%;
+    color: #222;
+}
+
+.pd-reviews-summary {
+    margin-bottom: 2rem;
+}
+
+.pd-score {
+    color: #222;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.pd-reviews-summary p {
+    margin-bottom: 0;
+}
+
+.pd-reviews-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.pd-review-card {
+    padding: 1.25rem;
+    border: 1px solid #eee;
+}
+
+.pd-review-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    color: #777;
+    font-size: .8rem;
+}
+
+.pd-review-head span:first-child {
+    color: #222;
+    font-weight: 700;
+}
+
+.product-detail__missing {
+    padding: 8rem 0;
+    text-align: center;
+}
+
+.product-detail__missing a {
+    color: #f15623;
+}
+
+@media (max-width: 980px) {
+    .product-detail__grid {
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .product-detail-page .topbar {
+        padding: 1rem 1.25rem;
+    }
+
+    .product-detail-page .topbar-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .product-detail {
+        min-height: auto;
+        padding: 2rem 1.25rem 4rem;
+    }
+
+    .product-detail__breadcrumb {
+        margin-bottom: 2rem;
+    }
+
+    .product-detail__grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .product-detail__content h1 {
+        font-size: 2.2rem;
+    }
+
+    .product-detail__purchase {
+        align-items: stretch;
+    }
+
+    .detail-button--cart {
+        flex: 1 1 calc(100% - 60px);
+    }
+
+    .detail-button--wishlist {
+        flex: 0 0 48px;
+    }
+
+    .detail-button--buy-full {
+        margin-top: .8rem;
+    }
+
+    .pd-tabs-nav {
+        gap: 1rem;
+    }
+
+    .pd-tab-btn {
+        font-size: .7rem;
+    }
+
+    .pd-review-head {
+        flex-direction: column;
+        gap: .3rem;
+    }
+}
+
+.hero__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+}
+
+.hero__link-icon {
+    display: inline-flex;
+    align-items: center;
+}
+
+.hero__link-line {
+    display: inline-block;
+    width: 60px;
+    height: 1px;
+    background: #fff;
+    transition: width 0.3s ease;
+}
+
+.hero__link-circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111; /* arrow color once visible */
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.hero__link-arrow {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* hover state */
+.hero__link:hover .hero__link-line {
+    width: 30px;
+}
+
+.hero__link:hover .hero__link-circle {
+    width: 36px;
+    height: 36px;
+}
+
+.hero__link:hover .hero__link-arrow {
+    opacity: 1;
+    transform: scale(1);
+}
+/* ===== HERO SECTION ===== */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero__slides {
+    position: absolute;
+    inset: 0;
+}
+
+.hero__slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.hero__slide.is-active {
+    opacity: 1;
+}
+
+/* ===== CONTENT WRAPPER ===== */
+.hero__content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 80px;
+}
+
+.hero__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 700px;
+}
+
+/* ===== EYEBROW (DESIGN) ===== */
+.hero__eyebrow {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 16px 0;
+}
+
+/* ===== NUMBER + TOTAL (02 /04) ===== */
+.hero__meta {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.hero__number {
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+}
+
+.hero__divider {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.hero__count {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ===== TITLE (DANCE AND NIGHT CLUB) ===== */
+.hero__title {
+    font-size: clamp(48px, 6vw, 90px);
+    font-weight: 800;
+    line-height: 1.05;
+    color: #fff;
+    margin: 0 0 28px 0;
+    text-transform: uppercase;
+}
+
+/* ===== VIEW CASE LINK ===== */
+.hero__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.hero__link-icon {
+    display: inline-flex;
+    align-items: center;
+}
+
+.hero__link-line {
+    display: inline-block;
+    width: 50px;
+    height: 1px;
+    background: #fff;
+    transition: width 0.3s ease;
+}
+
+.hero__link-circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.hero__link-arrow {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.hero__link:hover .hero__link-line {
+    width: 25px;
+}
+
+.hero__link:hover .hero__link-circle {
+    width: 34px;
+    height: 34px;
+}
+
+.hero__link:hover .hero__link-arrow {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===== SLIDE ARROWS (top-right) ===== */
+.hero__controls {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hero__arrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.hero__arrow:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .hero__content {
+        padding-left: 24px;
+    }
+    .hero__title {
+        font-size: 40px;
+    }
+}
+
+/* ===== CONTENT WRAPPER — LEFT ALIGN EVERYTHING ===== */
+.hero__content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 80px;
+}
+
+.hero__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 700px;
+    position: relative; /* absolute avoid — normal flow */
+}
+
+/* ===== EYEBROW ===== */
+.hero__eyebrow {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0 0 14px 0;
+    text-align: left;
+}
+
+/* ===== NUMBER + TOTAL — SAME LINE, LEFT ===== */
+.hero__meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 4px;
+    margin-bottom: 6px;
+    width: 100%;
+}
+
+.hero__number {
+    font-size: 42px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    text-align: left;
+}
+
+.hero__count {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===== TITLE — BELOW NUMBER, LEFT, NO OVERLAP ===== */
+.hero__title {
+    font-size: clamp(46px, 5.5vw, 80px);
+    font-weight: 800;
+    line-height: 1.05;
+    color: #fff;
+    margin: 0 0 30px 0;
+    text-transform: uppercase;
+    text-align: left;
+    width: 100%;
+    position: static; /* koi absolute nahi */
+}
+
+/* ===== VIEW CASE LINK — LEFT ===== */
+.hero__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-align: left;
+    align-self: flex-start;
+}
+
+/* Move hero text completely to the left */
+.hero__content {
+    left: 32px !important;
+    right: auto !important;
+    transform: translateY(10%) !important;
+    width: auto !important;
+}
+
+.hero__copy {
+    margin-left: -66px !important;
+    text-align: left !important;
+}
+
+

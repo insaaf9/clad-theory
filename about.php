@@ -2,6 +2,8 @@
 $pageTitle = 'About | Jack Ryan';
 $bodyClass = 'about-page';
 $currentPage = 'about';
+
+$instagramVideos = [];
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/navbar.php';
 ?>
@@ -139,6 +141,46 @@ require __DIR__ . '/includes/navbar.php';
                 <span>Designer</span>
             </article>
         </div>
+    </div>
+</section>
+
+<section class="instagram-section" aria-labelledby="instagram-heading">
+    <div class="section-wrap">
+        <div class="instagram-section__header">
+            <div>
+                <p class="instagram-section__eyebrow">Follow the process</p>
+                <h2 id="instagram-heading">Latest on Instagram</h2>
+            </div>
+            <a class="instagram-section__link" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                Visit Instagram <span aria-hidden="true">↗</span>
+            </a>
+        </div>
+
+        <?php if ($instagramVideos): ?>
+            <div class="instagram-grid">
+                <?php foreach ($instagramVideos as $video): ?>
+                    <article class="instagram-card">
+                        <blockquote class="instagram-media"
+                            data-instgrm-permalink="<?php echo htmlspecialchars($video['url'], ENT_QUOTES, 'UTF-8'); ?>"
+                            data-instgrm-version="14">
+                            <a href="<?php echo htmlspecialchars($video['url'], ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener noreferrer">
+                                <?php echo htmlspecialchars($video['title'] ?? 'Watch our latest reel'); ?>
+                            </a>
+                        </blockquote>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+            <script async src="https://www.instagram.com/embed.js"></script>
+        <?php else: ?>
+            <div class="instagram-empty">
+                <span class="instagram-empty__mark" aria-hidden="true">◎</span>
+                <div>
+                    <h3>See what we are making now.</h3>
+                    <p>Follow Clad Theory for new work, studio moments, and product drops.</p>
+                </div>
+                <a class="instagram-empty__button" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Open Instagram <span aria-hidden="true">↗</span></a>
+            </div>
+        <?php endif; ?>
     </div>
 </section>
 

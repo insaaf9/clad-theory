@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentMaxPrice = parseFloat(priceRange ? priceRange.value : 180);
     let currentSort = 'default';
     let searchQuery = '';
+    let visibleLimit = 15;
     let cartCount = 0;
     let wishlistCount = 0;
 
@@ -62,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <span class="toast-message">${message}</span>
         `;
         toastContainer.appendChild(toast);
-        
+
         setTimeout(() => toast.classList.add('is-show'), 10);
         setTimeout(() => {
             toast.classList.remove('is-show');
@@ -72,9 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- Main Filter & Sort Engine ---
     function filterAndSortProducts() {
-        let visibleCount = 0;
-
-        productCards.forEach(card => {
+        const matchingCards = productCards.filter(card => {
             const cat = card.dataset.category || '';
             const price = parseFloat(card.dataset.price || 0);
             const name = (card.dataset.name || '').toLowerCase();
@@ -82,43 +81,39 @@ document.addEventListener('DOMContentLoaded', function () {
             const matchesCat = (currentCategory === 'all') || (cat.toLowerCase() === currentCategory.toLowerCase());
             const matchesPrice = price <= currentMaxPrice;
             const matchesSearch = searchQuery === '' || name.includes(searchQuery.toLowerCase());
-
-            if (matchesCat && matchesPrice && matchesSearch) {
-                card.style.display = '';
-                visibleCount++;
-            } else {
-                card.style.display = 'none';
-            }
+            return matchesCat && matchesPrice && matchesSearch;
         });
 
-        // Update Counter
-        if (productCount) {
-            productCount.textContent = visibleCount;
-        }
-
-        // Toggle No Products Message
-        if (noProductsMsg) {
-            noProductsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
-        }
-
-        // Sort Visible Product Cards
         const sortedCards = productCards.slice().sort((a, b) => {
-            if (a.style.display === 'none') return 1;
-            if (b.style.display === 'none') return -1;
-
-            if (currentSort === 'price-low') {
-                return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
-            } else if (currentSort === 'price-high') {
-                return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
-            } else if (currentSort === 'rating') {
-                return parseInt(b.dataset.rating) - parseInt(a.dataset.rating);
-            } else if (currentSort === 'name') {
-                return a.dataset.name.localeCompare(b.dataset.name);
-            }
+            const aMatches = matchingCards.includes(a);
+            const bMatches = matchingCards.includes(b);
+            if (aMatches !== bMatches) return aMatches ? -1 : 1;
+            if (currentSort === 'price-low') return parseFloat(a.dataset.price) - parseFloat(b.dataset.price);
+            if (currentSort === 'price-high') return parseFloat(b.dataset.price) - parseFloat(a.dataset.price);
+            if (currentSort === 'rating') return parseInt(b.dataset.rating) - parseInt(a.dataset.rating);
+            if (currentSort === 'name') return a.dataset.name.localeCompare(b.dataset.name);
             return parseInt(a.dataset.id) - parseInt(b.dataset.id);
         });
 
-        sortedCards.forEach(card => productsGrid.appendChild(card));
+        let displayedCount = 0;
+        sortedCards.forEach(card => {
+            const isVisible = matchingCards.includes(card) && displayedCount < visibleLimit;
+            card.style.display = isVisible ? '' : 'none';
+            if (matchingCards.includes(card)) displayedCount++;
+            productsGrid.appendChild(card);
+        });
+
+        if (productCount) {
+            productCount.textContent = matchingCards.length;
+        }
+        if (noProductsMsg) {
+            noProductsMsg.style.display = matchingCards.length === 0 ? 'block' : 'none';
+        }
+        if (loadMoreBtn) {
+            loadMoreBtn.hidden = matchingCards.length <= visibleLimit;
+            loadMoreBtn.disabled = false;
+            loadMoreBtn.textContent = 'DISCOVER MORE';
+        }
     }
 
     // --- Price Slider Event Listener ---
@@ -131,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
             updatePriceSliderBackground();
             filterAndSortProducts();
         });
-        
+
         // Initial setup
         updatePriceSliderBackground();
     }
@@ -196,12 +191,18 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             updatePriceSliderBackground();
+            visibleLimit = 15;
             filterAndSortProducts();
         });
     }
 
     // --- Add to Cart & Wishlist Click Handlers ---
     document.addEventListener('click', function (e) {
+        const productCard = e.target.closest('.product-card');
+        if (productCard && !e.target.closest('button, a')) {
+            window.location.href = productCard.dataset.detailUrl;
+            return;
+        }
         const cartBtn = e.target.closest('.add-cart-btn');
         if (cartBtn) {
             e.preventDefault();
@@ -320,16 +321,23 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- Load More / Discover More Button ---
     if (loadMoreBtn) {
         loadMoreBtn.addEventListener('click', function () {
+            visibleLimit += 15;
             this.textContent = 'LOADING PRODUCTS...';
             this.disabled = true;
 
             setTimeout(() => {
-                showToast('All 15 catalog products are currently loaded.', 'success');
-                this.textContent = 'ALL PRODUCTS LOADED';
-                this.style.opacity = '0.6';
+                filterAndSortProducts();
             }, 700);
         });
     }
+
+    document.addEventListener('keydown', function (e) {
+        const card = e.target.closest('.product-card');
+        if (card && !e.target.closest('button, a') && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault();
+            window.location.href = card.dataset.detailUrl;
+        }
+    });
 
     // --- Smooth Scroll to Top ---
     if (backToTopBtn) {
