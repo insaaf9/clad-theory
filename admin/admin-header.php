@@ -62,6 +62,17 @@ $adminTitle = isset($adminTitle) ? $adminTitle : 'Admin Panel';
                 </a>
             </li>
 
+            <!-- Categories -->
+            <li class="sidebar-nav__item">
+                <a href="categories.php"
+                   id="nav-categories"
+                   class="<?php echo $adminPage === 'categories' ? 'active' : ''; ?>"
+                   aria-current="<?php echo $adminPage === 'categories' ? 'page' : 'false'; ?>">
+                    <span class="nav-icon">🏷️</span>
+                    Categories
+                </a>
+            </li>
+
         </ul>
     </nav>
 
